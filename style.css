@@ -1,0 +1,362 @@
+/*
+ * Hourlings Calendar Stylesheet
+ * @author: Colosi;
+ */
+:root {
+  --theme-hue: 180;
+  --theme-sat: 4%;
+  --theme-soft: hsl(var(--theme-hue), var(--theme-sat), 95%);
+  --theme-subtle: hsl(var(--theme-hue), var(--theme-sat), 80%);
+  --theme-up: hsl(var(--theme-hue), var(--theme-sat), 85%);
+  --theme-main: hsl(var(--theme-hue), var(--theme-sat), 70%);
+  --theme-down: hsl(var(--theme-hue), var(--theme-sat), 50%);
+  --theme-comp-a: hsla(196, 100%, 50%, 100%);
+  --theme-comp-b: hsla(196, 100%, 50%, 30%);
+  --theme-admin: hsl(var(--theme-hue), var(--theme-sat), 30%);
+
+  --theme-month-dark: hsl(var(--theme-hue), var(--theme-sat), 72%);
+  --theme-month-light: hsl(var(--theme-hue), var(--theme-sat), 82%);
+
+  --theme-spacer-row: 0px;
+  --theme-spacer-week: 4px;
+  --theme-spacer-month: 12px;
+}
+
+/*****************************************************************************
+ * The HTML Stack
+ *****************************************************************************/
+body {
+  font-size: 14px !important;
+  font-family: "Cinzel", serif !important;
+}
+
+#outer {
+  width: 100%;
+  height: 100vh;
+  padding: 25px;
+}
+
+#bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background-image: url("img/hypnotize.png");
+  background-repeat: repeat;
+  filter: blur(3px);
+  z-index: -1;
+}
+
+#main {
+  width: 100%;
+  height: 100%;
+  background-color: var(--theme-main);
+
+  left: 0;
+  right: 0;
+  margin: auto;
+
+  /* offset-x | offset-y | blur-radius | spread-radius | color */
+  box-shadow: 0px 0px 20px 2px #ccc;
+  border-radius: 20px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+#content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  padding-top: 0px;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-bottom: 25px; /* Resist the urge to change this */
+}
+
+.dm-handle {
+  border: 0;
+  color: var(--theme-down) !important;
+  background-color: #fff;
+  font-size: 24px !important;
+  text-align: center;
+  outline: none;
+  width: 100%;
+  flex: 0 0 40px;
+}
+
+.dm-handle::placeholder {
+  opacity: 1;
+}
+
+.dm-handle:focus::placeholder {
+  opacity: 0.25;
+}
+
+#calendar {
+  height: 100% !important;
+  flex: 1 0 1px;
+}
+
+#footer {
+  flex: 0 0 25px;
+}
+
+/*****************************************************************************
+ * The Calendar Stack
+ *****************************************************************************/
+.fc-view-container {
+  height: 100% !important;
+}
+.fc-view-container :not(a) {
+  /*
+		border-image: repeating-linear-gradient(120deg, red, red 20px, blue 20px, blue 40px) 20;
+  border-image-width: 20px;
+		*/
+  border-color: #fff !important;
+}
+.fc-view {
+  width: 100% !important;
+  height: 100% !important;
+}
+.fc-body {
+  height: 100% !important;
+}
+.table-bordered {
+  height: 100% !important;
+}
+
+.fc-day-grid-container {
+  height: 100% !important;
+  padding-bottom: 0px;
+}
+.fc-day-grid {
+  height: 100% !important;
+  padding-bottom: 0px;
+}
+
+/*****************************************************************************
+ * The Status Stack... I think I blew this away
+ *****************************************************************************/
+#dm-status {
+  position: relative;
+  top: 5px;
+  left: 20px;
+  color: #fff;
+  font-size: 32px;
+}
+
+#dm-status .dm-fading {
+  animation-name: FadingCycle;
+  animation-duration: 5s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+  filter: opacity(0);
+  font-weight: bold;
+  /*color: var(--theme-comp);*/
+  color: #fff;
+}
+
+@keyframes FadingCycle {
+  0% {
+    filter: opacity(0) blur(20px);
+  }
+  10% {
+    filter: opacity(1) blur(0);
+  }
+  40% {
+    filter: opacity(1) blur(0);
+  }
+  100% {
+    filter: opacity(0) blur(20px);
+  }
+}
+
+/*****************************************************************************
+ * Full Calendar customizations
+ *****************************************************************************/
+.fc-content {
+  padding: 0 5px;
+  width: fit-content;
+  border-radius: 3px;
+}
+
+.fc-center {
+  color: var(--theme-down) !important;
+  font-size: 24 !important;
+}
+
+.fc-head .fc-row {
+  border-top-width: 20px !important;
+}
+
+.fc-body .fc-row {
+  border-bottom-width: var(--theme-spacer-row) !important;
+}
+
+.fc-toolbar {
+  line-height: 1 !important;
+  margin-bottom: 0 !important;
+}
+
+.fc-week {
+  min-height: 2vh !important;
+}
+
+.fc-day-number {
+  padding-top: 5px !important;
+  padding-right: 10px !important;
+  font-size: 20px !important;
+  white-space: normal;
+}
+
+.fc-day-header {
+  background-color: var(--theme-admin) !important;
+  color: #fff;
+
+  font-size: 14px !important;
+  font-weight: bold !important;
+  text-decoration: none;
+}
+
+a.fc-day-grid-event.fc-event {
+  padding-left: 0 !important;
+  margin-right: 0;
+  border: none !important;
+  border-radius: 0px !important;
+}
+
+a.fc-day-grid-event.fc-event.fc-not-start > .fc-content {
+  opacity: 1;
+}
+
+.fc-title {
+  font-size: 16px !important;
+  white-space: normal;
+}
+
+.fc-dummy-button {
+  visibility: hidden !important;
+}
+
+button {
+  border-color: var(--theme-subtle) !important;
+  background-color: var(--theme-main) !important;
+  color: #fff !important;
+  padding-top: 2px !important;
+}
+
+button:hover {
+  background-color: var(--theme-up) !important;
+}
+button:active {
+  background-color: var(--theme-down) !important;
+}
+span.glyphicon {
+  font-size: 1.5em !important;
+}
+
+/*****************************************************************************
+ * Datemouse customizations
+ *****************************************************************************/
+.dm-filter-hide {
+  display: none !important;
+}
+
+.dm-event-selected {
+  /* x y blur spread */
+  box-shadow: inset 0 0 0 7px var(--theme-comp-b);
+  z-index: 1;
+}
+
+.dm-event-selected > .fc-content {
+  /* x y blur spread */
+  box-shadow: 0 0 0 3px var(--theme-comp-a);
+  z-index: 1;
+}
+
+.dm-event-unselected {
+  z-index: 0;
+  /*filter: blur(1px) opacity(.90) saturate(.10) brightness(1.25);*/
+  filter: opacity(0.25) saturate(0.75) brightness(1.25);
+}
+
+.fc-day-header:nth-of-type(5) {
+  border-right-width: var(--theme-spacer-week) !important;
+}
+.fc-day-header:nth-of-type(6) {
+  border-left-width: var(--theme-spacer-week) !important;
+}
+
+.dm-first-of-month-label {
+  font-size: 20px !important;
+  font-weight: bold !important;
+  text-decoration: none;
+  display: block !important;
+  text-align: left !important;
+  padding: 8px 8px !important;
+  line-height: 1 !important;
+  background-color: var(--theme-admin) !important;
+  color: #fff !important;
+  width: fit-content;
+}
+
+.fc-day-number.dm-month-even {
+  /*color: var(--theme-month-dark) !important;*/
+  color: #000 !important;
+}
+
+.fc-day-number.dm-month-odd {
+  /*color: var(--theme-month-light) !important;*/
+  color: #000 !important;
+}
+
+.fc-day.dm-month-even {
+  background-color: var(--theme-month-light) !important;
+}
+
+.fc-day.dm-month-odd {
+  background-color: var(--theme-month-dark) !important;
+}
+
+.fc-today .fc-day-number {
+  background-color: var(--theme-admin) !important;
+  padding-left: 9px !important;
+  color: #fff !important;
+}
+
+.dm-first-of-month-cell {
+  border-top-width: 0.5px !important;
+  border-right-width: 0.5px !important;
+  border-bottom-width: 0.5px !important;
+  border-left-width: var(--theme-spacer-month) !important;
+  /*
+		border-image: repeating-linear-gradient( 120deg, #aaa, #aaa 20px, #ddd 20px, #ddd 40px) 8 !important;
+  border-image-width: 1px 1px 1px 8px !important;
+		*/
+}
+
+.dm-last-row {
+  border-top-width: 0.5px !important;
+  border-right-width: 0.5px !important;
+  border-bottom-width: var(--theme-spacer-month) !important;
+  border-left-width: 0.5px !important;
+  /*
+		border-image: repeating-linear-gradient( 120deg, #aaa, #aaa 20px, #ddd 20px, #ddd 40px) 8 !important;
+  border-image-width: 1px 1px 8px 1px !important;
+		*/
+}
+
+.fc td:not(.dm-last-row):not(.dm-first-of-month-cell) {
+  border-width: 0.5px !important;
+  /*
+		border-image: repeating-linear-gradient(120deg, red, red 20px, blue 20px, blue 40px) 20;
+  border-image-width: 20px;
+		*/
+}
